@@ -5,11 +5,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 
 import javax.swing.*;
 
@@ -26,7 +21,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import stirling.software.SPDF.UI.WebBrowser;
-import stirling.software.SPDF.config.ConfigInitializer;
 import stirling.software.SPDF.model.ApplicationProperties;
 
 @SpringBootApplication
@@ -75,51 +69,55 @@ public class SPdfApplication {
 
         SpringApplication app = new SpringApplication(SPdfApplication.class);
 
-        Properties props = new Properties();
-
-        if (Boolean.parseBoolean(System.getProperty("STIRLING_PDF_DESKTOP_UI", "false"))) {
-            System.setProperty("java.awt.headless", "false");
-            app.setHeadless(false);
-            props.put("java.awt.headless", "false");
-            props.put("spring.main.web-application-type", "servlet");
-        }
-
-        app.setAdditionalProfiles("default");
-        app.addInitializers(new ConfigInitializer());
-        Map<String, String> propertyFiles = new HashMap<>();
-
-        // External config files
-        if (Files.exists(Paths.get("configs/settings.yml"))) {
-            propertyFiles.put("spring.config.additional-location", "file:configs/settings.yml");
-        } else {
-            log.warn("External configuration file 'configs/settings.yml' does not exist.");
-        }
-
-        if (Files.exists(Paths.get("configs/custom_settings.yml"))) {
-            String existingLocation =
-                    propertyFiles.getOrDefault("spring.config.additional-location", "");
-            if (!existingLocation.isEmpty()) {
-                existingLocation += ",";
-            }
-            propertyFiles.put(
-                    "spring.config.additional-location",
-                    existingLocation + "file:configs/custom_settings.yml");
-        } else {
-            log.warn("Custom configuration file 'configs/custom_settings.yml' does not exist.");
-        }
-        Properties finalProps = new Properties();
-
-        if (!propertyFiles.isEmpty()) {
-            finalProps.putAll(
-                    Collections.singletonMap(
-                            "spring.config.additional-location",
-                            propertyFiles.get("spring.config.additional-location")));
-        }
-
-        if (!props.isEmpty()) {
-            finalProps.putAll(props);
-        }
-        app.setDefaultProperties(finalProps);
+        //        Properties props = new Properties();
+        //
+        //        if (Boolean.parseBoolean(System.getProperty("STIRLING_PDF_DESKTOP_UI", "false")))
+        // {
+        //            System.setProperty("java.awt.headless", "false");
+        //            app.setHeadless(false);
+        //            props.put("java.awt.headless", "false");
+        //            props.put("spring.main.web-application-type", "servlet");
+        //        }
+        //
+        //        app.setAdditionalProfiles("default");
+        //        app.addInitializers(new ConfigInitializer());
+        //        Map<String, String> propertyFiles = new HashMap<>();
+        //
+        //        // External config files
+        //        if (Files.exists(Paths.get("configs/settings.yml"))) {
+        //            propertyFiles.put("spring.config.additional-location",
+        // "file:configs/settings.yml");
+        //        } else {
+        //            log.warn("External configuration file 'configs/settings.yml' does not
+        // exist.");
+        //        }
+        //
+        //        if (Files.exists(Paths.get("configs/custom_settings.yml"))) {
+        //            String existingLocation =
+        //                    propertyFiles.getOrDefault("spring.config.additional-location", "");
+        //            if (!existingLocation.isEmpty()) {
+        //                existingLocation += ",";
+        //            }
+        //            propertyFiles.put(
+        //                    "spring.config.additional-location",
+        //                    existingLocation + "file:configs/custom_settings.yml");
+        //        } else {
+        //            log.warn("Custom configuration file 'configs/custom_settings.yml' does not
+        // exist.");
+        //        }
+        //        Properties finalProps = new Properties();
+        //
+        //        if (!propertyFiles.isEmpty()) {
+        //            finalProps.putAll(
+        //                    Collections.singletonMap(
+        //                            "spring.config.additional-location",
+        //                            propertyFiles.get("spring.config.additional-location")));
+        //        }
+        //
+        //        if (!props.isEmpty()) {
+        //            finalProps.putAll(props);
+        //        }
+        //        app.setDefaultProperties(finalProps);
 
         app.run(args);
 

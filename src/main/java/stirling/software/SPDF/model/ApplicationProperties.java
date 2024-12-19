@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
@@ -25,7 +24,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import stirling.software.SPDF.config.YamlPropertySourceFactory;
 import stirling.software.SPDF.model.provider.GithubProvider;
 import stirling.software.SPDF.model.provider.GoogleProvider;
 import stirling.software.SPDF.model.provider.KeycloakProvider;
@@ -33,7 +31,7 @@ import stirling.software.SPDF.model.provider.UnsupportedProviderException;
 
 @Configuration
 @ConfigurationProperties(prefix = "")
-@PropertySource(value = "file:./configs/settings.yml", factory = YamlPropertySourceFactory.class)
+// @PropertySource(value = "file:./configs/settings.yml", factory = YamlPropertySourceFactory.class)
 @Data
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ApplicationProperties {
