@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,7 @@ import stirling.software.SPDF.config.interfaces.DatabaseBackupInterface;
 import stirling.software.SPDF.model.ApplicationProperties;
 import stirling.software.SPDF.model.Role;
 
-@Component
+// @Component
 @Slf4j
 public class InitialSecuritySetup {
 
