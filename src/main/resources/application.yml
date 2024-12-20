@@ -10,6 +10,8 @@
 # If you want to override with environment parameter follow parameter naming SECURITY_INITIALLOGIN_USERNAME #
 #############################################################################################################
 
+server:
+  port: 0
 
 security:
   enableLogin: false # set to 'true' to enable login
