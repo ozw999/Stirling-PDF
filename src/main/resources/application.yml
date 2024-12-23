@@ -13,6 +13,11 @@
 server:
   port: 0
 
+ui:
+  appName: 'Super PDF' # application's visible name
+  homeDescription: '' # short description or tagline shown on the homepage
+  appNameNavbar: '' # name displayed on the navigation bar
+
 security:
   enableLogin: false # set to 'true' to enable login
   csrfDisabled: true # set to 'true' to disable CSRF protection (not recommended for production)
@@ -87,11 +92,6 @@ system:
   customHTMLFiles: false # enable to have files placed in /customFiles/templates override the existing template HTML files
   tessdataDir: /usr/share/tessdata # path to the directory containing the Tessdata files. This setting is relevant for Windows systems. For Windows users, this path should be adjusted to point to the appropriate directory where the Tessdata files are stored.
   enableAnalytics: 'false' # set to 'true' to enable analytics, set to 'false' to disable analytics; for enterprise users, this is set to true
-
-ui:
-  appName: '' # application's visible name
-  homeDescription: '' # short description or tagline shown on the homepage
-  appNameNavbar: '' # name displayed on the navigation bar
 
 endpoints:
   toRemove: [] # list endpoints to disable (e.g. ['img-to-pdf', 'remove-pages'])
